@@ -1,0 +1,20 @@
+.html-editor {
+  &__editor, &__source-code {
+    display: block;
+    height: 12em;
+    width: 50%;
+    box-sizing: border-box;
+    border: 1px solid gray;
+    border-radius: 4px;
+    overflow: auto;
+    font-size: 14px;
+
+    pre {
+      margin: 0;
+    }
+  }
+
+  textarea {
+    white-space: pre-line;
+  }
+}

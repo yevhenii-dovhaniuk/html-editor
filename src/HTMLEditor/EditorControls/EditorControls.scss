@@ -1,0 +1,8 @@
+.editor-controls {
+  display: flex;
+  gap: 8px;
+
+  button.active {
+    border-color: green;
+  }
+}
