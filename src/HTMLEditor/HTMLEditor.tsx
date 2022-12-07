@@ -1,4 +1,4 @@
-import React, {FunctionComponent, useRef, useState} from 'react';
+import React, {FunctionComponent, useRef, useState, useTransition} from 'react';
 import './HTMLEditor.scss';
 import EditorControls from "./EditorControls/EditorControls";
 import {debounce} from "../common/debounce/debounce";
@@ -13,10 +13,14 @@ const HTMLEditor: FunctionComponent<Props> = (props) => {
   const [sourceCode, setSourceCode] = useState('');
   const [selection, setSelection] = useState<Selection | null>(null);
   const editorRef = useRef<HTMLDivElement>(null);
+  const [, startTransition] = useTransition();
 
-  const updateSourceCode = debounce(() => {
-    setSourceCode(editorRef.current?.innerHTML || '');
-  }, 200);
+  const updateSourceCode = () => {
+    const value = editorRef.current?.innerHTML || '';
+    startTransition(() => {
+      setSourceCode(value);
+    })
+  };
 
   const handleHTMLChanged = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (editorRef.current) {
